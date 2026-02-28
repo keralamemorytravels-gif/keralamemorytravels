@@ -4,7 +4,7 @@ import './FloatingWhatsApp.css';
 function FloatingWhatsApp() {
   return (
     <motion.a
-      href="https://wa.me/918143724405"
+      href="https://wa.me/919059323753"
       className="floating-whatsapp"
       target="_blank"
       rel="noopener noreferrer"

@@ -52,7 +52,7 @@ function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            Fly Beyond Destinations
+            Explore India Like Never Before
           </motion.h1>
           <motion.p 
             className="hero-subtitle"
@@ -60,19 +60,31 @@ function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
           >
-            Affordable Travel Packages From Your City
+            Affordable Packages From Vizag, Rajahmundry & Hyderabad
           </motion.p>
-          <motion.a 
-            href="#about" 
-            className="hero-cta"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 1.1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <motion.div 
+            className="hero-buttons"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
           >
-            Discover More
-          </motion.a>
+            <motion.a 
+              href="#packages" 
+              className="hero-cta hero-cta-primary"
+              whileHover={{ scale: 1.05, x: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View Packages
+            </motion.a>
+            <motion.a 
+              href="https://wa.me/918143724405?text=I want to book a package"
+              className="hero-cta hero-cta-secondary"
+              whileHover={{ scale: 1.05, x: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Book Now
+            </motion.a>
+          </motion.div>
         </motion.div>
         <motion.div 
           className="scroll-indicator"
@@ -134,7 +146,7 @@ function Home() {
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
                 <div className="stat-item">
-                  <h3 className="stat-number">10+</h3>
+                  <h3 className="stat-number">7+</h3>
                   <p className="stat-label">Years Experience</p>
                 </div>
                 <div className="stat-item">
@@ -369,7 +381,7 @@ function Home() {
                 <li>✓ Professional crew & 24/7 support</li>
               </ul>
               <motion.a 
-                href="https://wa.me/918143724405?text=I'm interested in booking a houseboat experience"
+                href="https://wa.me/919059323753?text=I'm interested in booking a houseboat experience"
                 className="signature-cta"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -509,6 +521,54 @@ function Home() {
                 <div className="testimonial-rating">{testimonial.rating}</div>
                 <p className="testimonial-text">"{testimonial.text}"</p>
                 <p className="testimonial-author">{testimonial.author}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="cloud-divider"></div>
+
+      {/* Gallery - Your Memories */}
+      <section className="gallery-section">
+        <div className="container">
+          <motion.h2 
+            className="section-title"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Your Memories
+          </motion.h2>
+          <motion.p 
+            className="section-subtitle"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Moments captured by our travelers
+          </motion.p>
+          <div className="gallery-grid-home">
+            {[
+              "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+              "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+              "https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800&q=80",
+              "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800&q=80",
+              "https://images.unsplash.com/photo-1610993189540-b9db5a965c2e?w=800&q=80",
+              "https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?w=800&q=80"
+            ].map((img, index) => (
+              <motion.div
+                key={index}
+                className="gallery-item"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, zIndex: 10 }}
+              >
+                <img src={img} alt={`Memory ${index + 1}`} />
               </motion.div>
             ))}
           </div>

@@ -11,6 +11,8 @@ function PackageDetails() {
   const { id } = useParams();
   const [members, setMembers] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [selectedDuration, setSelectedDuration] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState(null);
   
   const pkg = packages.find(p => p.id === parseInt(id));
 
@@ -22,51 +24,180 @@ function PackageDetails() {
   if (loading) return <Loader />;
   if (!pkg) return <div className="not-found">Package not found</div>;
 
-  const totalPrice = pkg.price * members;
+  const currentPackage = pkg.packageOptions ? pkg.packageOptions[selectedDuration] : { price: pkg.price };
+  const totalPrice = currentPackage.price * members;
 
   const handleBookNow = () => {
-    const message = `Hello, I want to book the ${pkg.name} for ${members} ${members === 1 ? 'Member' : 'Members'}. Total price is ₹${totalPrice}.`;
-    const whatsappUrl = `https://wa.me/918143724405?text=${encodeURIComponent(message)}`;
+    const durationText = pkg.packageOptions ? `${currentPackage.days} Days / ${currentPackage.nights} Nights` : pkg.duration;
+    const message = `Hello, I want to book the ${pkg.name} (${durationText}) for ${members} ${members === 1 ? 'Member' : 'Members'}. Total price is ₹${totalPrice}.`;
+    const whatsappUrl = `https://wa.me/919059323753?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
+  const openLightbox = (image) => {
+    setLightboxImage(image);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+  };
+
+  // Kerala cultural highlights
+  const keralaCulturalHighlights = [
+    {
+      title: "Traditional Elephant Festival",
+      description: "Witness the majestic temple elephants adorned in golden ornaments during vibrant festive processions that showcase Kerala's rich cultural heritage.",
+      icon: "🐘",
+      bgImage: "https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800&q=80"
+    },
+    {
+      title: "Chenda Melam (Traditional Drums)",
+      description: "Experience the powerful rhythmic beats of traditional Kerala temple drum performances that echo through ancient temple courtyards.",
+      icon: "🥁",
+      bgImage: "https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?w=800&q=80"
+    },
+    {
+      title: "Kathakali Performance",
+      description: "Marvel at Kerala's classical dance-drama art form featuring elaborate costumes, intricate makeup, and expressive storytelling through dance.",
+      icon: "🎭",
+      bgImage: "https://images.unsplash.com/photo-1610993189540-b9db5a965c2e?w=800&q=80"
+    },
+    {
+      title: "Backwater Experience",
+      description: "Glide through the serene Alleppey backwaters on a traditional houseboat, surrounded by lush greenery and tranquil waters.",
+      icon: "🚢",
+      bgImage: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
+    }
+  ];
+
   return (
     <div className="package-details">
-      <motion.div 
-        className="details-hero"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <img src={pkg.image} alt={pkg.name} className="details-hero-image" />
-        <div className="details-hero-overlay">
-          <div className="container">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <Link to="/" className="back-link">← Back to Packages</Link>
-            </motion.div>
-            <motion.h1 
-              className="details-title"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              {pkg.name}
-            </motion.h1>
-            <motion.p 
-              className="details-duration"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              ⏱️ {pkg.duration}
-            </motion.p>
+      {pkg.isKerala && (
+        <>
+          <video autoPlay loop muted playsInline className="package-page-video-bg">
+            <source src="/elephantbg.mp4" type="video/mp4" />
+          </video>
+          <div className="package-page-video-overlay"></div>
+        </>
+      )}
+      
+      {pkg.isKerala && (
+        <>
+          {/* Kerala Welcome Section */}
+          <motion.section 
+            className="kerala-intro-section"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="container">
+              <motion.h1 
+                className="kerala-intro-title"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              >
+                Welcome to God's Own Country – Kerala
+              </motion.h1>
+              <motion.p 
+                className="kerala-intro-text"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                Kerala is a land of backwaters, lush greenery, cultural heritage, traditional art forms, and breathtaking landscapes. 
+                Experience nature, tradition, and serenity in one unforgettable journey.
+              </motion.p>
+            </div>
+            <div className="coconut-divider">
+              <svg viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,50 Q300,80 600,50 T1200,50 L1200,100 L0,100 Z" fill="#fff"/>
+              </svg>
+            </div>
+          </motion.section>
+
+          {/* Cultural Highlights Section */}
+          <section className="cultural-highlights-section">
+            <div className="container">
+              <motion.h2 
+                className="section-title-kerala"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                Cultural Highlights
+              </motion.h2>
+              <div className="cultural-grid">
+                {keralaCulturalHighlights.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    className="cultural-card"
+                    style={{
+                      backgroundImage: `linear-gradient(rgba(27, 67, 50, 0.85), rgba(45, 106, 79, 0.9)), url(${item.bgImage})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.15 }}
+                  >
+                    <div className="cultural-icon">{item.icon}</div>
+                    <h3 className="cultural-title">{item.title}</h3>
+                    <p className="cultural-description">{item.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Wave Divider */}
+          <div className="wave-divider">
+            <svg viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0,50 Q150,20 300,50 T600,50 T900,50 T1200,50 L1200,100 L0,100 Z" fill="#f0fdf4"/>
+            </svg>
           </div>
-        </div>
-      </motion.div>
+        </>
+      )}
+
+      {!pkg.isKerala && (
+        <motion.div 
+          className="details-hero"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <img src={pkg.image} alt={pkg.name} className="details-hero-image" />
+          <div className="details-hero-overlay">
+            <div className="container">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <Link to="/" className="back-link">← Back to Packages</Link>
+              </motion.div>
+              <motion.h1 
+                className="details-title"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                {pkg.name}
+              </motion.h1>
+              <motion.p 
+                className="details-duration"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                ⏱️ {pkg.duration}
+              </motion.p>
+            </div>
+          </div>
+        </motion.div>
+      )}
 
       <div className="container details-content">
         <div className="details-main">
@@ -129,6 +260,42 @@ function PackageDetails() {
             </ul>
           </motion.section>
 
+          {pkg.itineraries && (
+            <motion.section 
+              className="details-section itinerary-section"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <h2>{currentPackage.days} Days Magical Kerala Tour Itinerary ✨🌴</h2>
+              <div className="itinerary-timeline">
+                {pkg.itineraries[currentPackage.days]?.map((day, index) => (
+                  <motion.div
+                    key={index}
+                    className="itinerary-day"
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.2 }}
+                  >
+                    <div className="day-number">Day {day.day}</div>
+                    <div className="day-content">
+                      <h3 className="day-title">{day.title}</h3>
+                      <p className="day-subtitle">{day.subtitle}</p>
+                      <div className="day-places">
+                        {day.places.map((place, idx) => (
+                          <span key={idx} className="place-tag">📍 {place}</span>
+                        ))}
+                      </div>
+                      <p className="day-description">{day.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.section>
+          )}
+
           <motion.section 
             className="details-section gallery-section"
             initial={{ opacity: 0, y: 30 }}
@@ -138,18 +305,45 @@ function PackageDetails() {
           >
             <h2>Gallery</h2>
             <div className="gallery-grid">
-              {[1, 2, 3].map((i) => (
+              {[
+                "/keralagal1.jpg",
+                "/keralagal2.jpg",
+                "/keralagal3.jpg"
+              ].map((img, i) => (
                 <motion.img 
                   key={i}
-                  src={pkg.image} 
-                  alt={`Gallery ${i}`} 
+                  src={img} 
+                  alt={`Gallery ${i + 1}`} 
                   className="gallery-image"
+                  onClick={() => openLightbox(img)}
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 />
               ))}
             </div>
           </motion.section>
+
+          {/* Lightbox Modal */}
+          {lightboxImage && (
+            <motion.div 
+              className="lightbox-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeLightbox}
+            >
+              <motion.div 
+                className="lightbox-content"
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.8 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button className="lightbox-close" onClick={closeLightbox}>✕</button>
+                <img src={lightboxImage} alt="Gallery view" />
+              </motion.div>
+            </motion.div>
+          )}
         </div>
 
         <motion.div 
@@ -159,9 +353,27 @@ function PackageDetails() {
           transition={{ delay: 0.6 }}
         >
           <div className="booking-card">
+            {pkg.packageOptions && (
+              <div className="duration-section">
+                <label htmlFor="duration">Select Duration</label>
+                <select 
+                  id="duration"
+                  value={selectedDuration} 
+                  onChange={(e) => setSelectedDuration(parseInt(e.target.value))}
+                  className="duration-select"
+                >
+                  {pkg.packageOptions.map((option, index) => (
+                    <option key={index} value={index}>
+                      {option.days} Days / {option.nights} Nights - ₹{option.price}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
             <div className="price-section">
               <span className="price-label">Price per head</span>
-              <span className="price-value">₹{pkg.price}</span>
+              <span className="price-value">₹{currentPackage.price}</span>
             </div>
 
             <div className="members-section">
@@ -194,7 +406,7 @@ function PackageDetails() {
             <motion.button 
               onClick={handleBookNow} 
               className="book-now-btn"
-              whileHover={{ scale: 1.02, boxShadow: "0 8px 25px rgba(37, 211, 102, 0.5)" }}
+              whileHover={{ scale: 1.02, boxShadow: "0 8px 25px rgba(251, 133, 0, 0.5)" }}
               whileTap={{ scale: 0.98 }}
             >
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
