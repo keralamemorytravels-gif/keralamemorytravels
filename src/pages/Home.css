@@ -500,27 +500,54 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  z-index: 0;
 }
 
 .service-icon {
   font-size: 4rem;
   margin-bottom: 1.5rem;
   display: inline-block;
-  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.8));
+  position: relative;
+  z-index: 1;
 }
 
 .service-title {
   font-size: 1.5rem;
-  color: #2d3748;
+  color: white;
   margin: 0 0 1rem 0;
-  font-weight: 600;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
 }
 
 .service-description {
-  color: #4a5568;
+  color: white;
   line-height: 1.7;
   margin: 0;
   font-size: 1rem;
+  position: relative;
+  z-index: 1;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {

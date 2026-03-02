@@ -628,27 +628,36 @@ function Home() {
               {
                 icon: "🚢",
                 title: "Houseboat Experiences",
-                description: "Cruise the enchanting backwaters of Alleppey on a traditional Kerala houseboat with world-class amenities."
+                description: "Cruise the enchanting backwaters of Alleppey on a traditional Kerala houseboat with world-class amenities.",
+                bgImage: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80"
               },
               {
                 icon: "⛰️",
                 title: "Hill Stations",
-                description: "Explore the misty tea gardens of Munnar and the wild beauty of Wayanad's verdant hills."
+                description: "Explore the misty tea gardens of Munnar and the wild beauty of Wayanad's verdant hills.",
+                bgImage: "https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800&q=80"
               },
               {
                 icon: "🏖️",
                 title: "Beaches",
-                description: "Soak in the sun at Varkala's cliffside shores and the iconic Kovalam lighthouse beach."
+                description: "Soak in the sun at Varkala's cliffside shores and the iconic Kovalam lighthouse beach.",
+                bgImage: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80"
               },
               {
                 icon: "🦁",
                 title: "Wildlife & Nature Tours",
-                description: "Encounter elephants in Periyar, exotic birds in Kumarakom, and the dense forests of Silent Valley."
+                description: "Encounter elephants in Periyar, exotic birds in Kumarakom, and the dense forests of Silent Valley.",
+                bgImage: "https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?w=800&q=80"
               }
             ].map((service, index) => (
               <motion.div
                 key={index}
                 className="service-card"
+                style={{
+                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(${service.bgImage})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
