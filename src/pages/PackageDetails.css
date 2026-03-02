@@ -23,7 +23,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
   z-index: -1;
   pointer-events: none;
 }
@@ -125,7 +125,7 @@
 }
 
 .cultural-card {
-  background: linear-gradient(135deg, rgba(216, 243, 220, 0.5), rgba(255, 255, 255, 0.9));
+  background: #000;
   border-radius: 20px;
   padding: 0;
   text-align: center;
@@ -137,9 +137,6 @@
   min-height: 350px;
   display: flex;
   flex-direction: column;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
   isolation: isolate;
 }
 
@@ -149,11 +146,13 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 50%;
+  bottom: 0;
   background-image: inherit;
   background-size: cover;
   background-position: center;
   z-index: 0;
+  opacity: 0.4;
+  filter: blur(0.5px);
 }
 
 .cultural-card::after {
@@ -162,9 +161,10 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 50%;
-  background: linear-gradient(to bottom, rgba(27, 67, 50, 0.7), rgba(45, 106, 79, 0.85));
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
   z-index: 1;
+  backdrop-filter: blur(0.5px);
 }
 
 .cultural-card:hover {
@@ -179,6 +179,7 @@
   position: relative;
   z-index: 2;
   margin-top: 2rem;
+  display: none;
 }
 
 .cultural-title {
@@ -186,25 +187,25 @@
   color: white;
   margin: 0 0 1rem 0;
   font-weight: 700;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
   position: relative;
   z-index: 2;
-  padding: 0 1rem;
+  padding: 2rem 1rem 0 1rem;
 }
 
 .cultural-description {
   font-size: 1.05rem;
-  color: #2d3748;
+  color: white;
   line-height: 1.7;
   margin: 0;
   position: relative;
   z-index: 2;
-  background: white;
   padding: 1.5rem;
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
 }
 
 /* Wave Divider */
@@ -326,9 +327,10 @@
 }
 
 .details-section h2 {
-  color: #2d3748;
+  color: white;
   font-size: 1.8rem;
   margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .details-main {
@@ -338,9 +340,10 @@
 }
 
 .details-description {
-  color: #4a5568;
+  color: white;
   line-height: 1.8;
   font-size: 1.1rem;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 /* Itinerary Section */
@@ -873,4 +876,27 @@
   .day-description {
     font-size: 0.95rem;
   }
+}
+
+.price-note {
+  display: block;
+  color: #fb8500;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.package-option {
+  margin-bottom: 3rem;
+}
+
+.package-option-title {
+  font-size: 1.8rem;
+  color: #fb8500;
+  margin: 0 0 2rem 0;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, rgba(251, 133, 0, 0.1), rgba(255, 183, 3, 0.1));
+  border-left: 4px solid #fb8500;
+  border-radius: 8px;
+  font-weight: 700;
 }

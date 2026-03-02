@@ -114,3 +114,46 @@
   background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
   color: white;
 }
+
+/* Coming Soon Styles */
+.package-card.coming-soon {
+  opacity: 0.85;
+}
+
+.package-card.coming-soon .package-image {
+  position: relative;
+}
+
+.coming-soon-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  z-index: 3;
+}
+
+.package-badge-label.coming-soon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.view-details-btn.disabled {
+  background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.view-details-btn.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}

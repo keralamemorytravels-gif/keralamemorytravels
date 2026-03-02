@@ -4,6 +4,7 @@ import PackageCard from '../components/PackageCard';
 import Loader from '../components/Loader';
 import ScrollToTop from '../components/ScrollToTop';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
+import QuickNav from '../components/QuickNav';
 import { packages } from '../data/packages';
 import './Home.css';
 
@@ -52,7 +53,7 @@ function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            Explore India Like Never Before
+            Discover Kerala's Hidden Treasures
           </motion.h1>
           <motion.p 
             className="hero-subtitle"
@@ -60,7 +61,7 @@ function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
           >
-            Affordable Packages From Vizag, Rajahmundry & Hyderabad
+            Affordable Kerala Packages • Customized Itineraries • Unforgettable Experiences
           </motion.p>
           <motion.div 
             className="hero-buttons"
@@ -77,7 +78,7 @@ function Home() {
               View Packages
             </motion.a>
             <motion.a 
-              href="https://wa.me/918143724405?text=I want to book a package"
+              href="https://wa.me/919059323753?text=I want to book a package"
               className="hero-cta hero-cta-secondary"
               whileHover={{ scale: 1.05, x: 5 }}
               whileTap={{ scale: 0.95 }}
@@ -124,9 +125,10 @@ function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                Welcome to Kerala Memories, your trusted travel companion for exploring the enchanting beauty of God's Own Country. 
-                With years of experience in crafting unforgettable journeys, we specialize in creating personalized travel experiences 
-                that showcase the best of Kerala's natural wonders, rich culture, and warm hospitality.
+                Welcome to Kerala Memory Travels, your trusted travel companion for exploring the enchanting beauty of God's Own Country. 
+                With years of experience in crafting unforgettable journeys, we specialize in creating personalized Kerala travel experiences 
+                that showcase the best of Kerala's natural wonders, rich culture, and warm hospitality. We arrange complete packages within Kerala, 
+                and can also assist with travel arrangements from your city.
               </motion.p>
               <motion.p 
                 className="about-description"
@@ -135,7 +137,7 @@ function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                Our team of local experts is passionate about sharing the hidden gems and authentic experiences that make Kerala truly special. 
+                Our team of local Kerala experts is passionate about sharing the hidden gems and authentic experiences that make Kerala truly special. 
                 From the serene backwaters of Alleppey to the misty hills of Munnar, we ensure every moment of your journey becomes a cherished memory.
               </motion.p>
               <motion.div 
@@ -150,7 +152,7 @@ function Home() {
                   <p className="stat-label">Years Experience</p>
                 </div>
                 <div className="stat-item">
-                  <h3 className="stat-number">5000+</h3>
+                  <h3 className="stat-number">1500+</h3>
                   <p className="stat-label">Happy Travelers</p>
                 </div>
                 <div className="stat-item">
@@ -264,22 +266,22 @@ function Home() {
               {
                 icon: "🗺️",
                 title: "Local Kerala Experts",
-                description: "Born and raised here — we know every hidden gem."
+                description: "Born and raised in Kerala — we know every hidden gem and authentic experience."
               },
               {
                 icon: "✨",
                 title: "Customizable Packages",
-                description: "Every trip tailored to your pace, budget, and interests."
+                description: "Every trip tailored to your pace, budget, and interests within Kerala."
               },
               {
                 icon: "💰",
-                title: "Affordable Pricing",
-                description: "Premium experiences without the premium price tag."
+                title: "Transparent Pricing",
+                description: "Clear package costs. Optional travel arrangements from your city available."
               },
               {
                 icon: "📞",
                 title: "24/7 Support",
-                description: "We're just a call or message away, always."
+                description: "We're just a call or message away throughout your Kerala journey."
               }
             ].map((item, index) => (
               <motion.div
@@ -336,7 +338,7 @@ function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Popular Kerala Packages
+            Explore Kerala with Our Curated Packages
           </motion.p>
           <div className="packages-grid">
             {packages.map((pkg, index) => (
@@ -526,57 +528,9 @@ function Home() {
           </div>
         </div>
       </section>
-
-      <div className="cloud-divider"></div>
-
-      {/* Gallery - Your Memories */}
-      <section className="gallery-section">
-        <div className="container">
-          <motion.h2 
-            className="section-title"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Your Memories
-          </motion.h2>
-          <motion.p 
-            className="section-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Moments captured by our travelers
-          </motion.p>
-          <div className="gallery-grid-home">
-            {[
-              "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-              "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-              "https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800&q=80",
-              "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800&q=80",
-              "https://images.unsplash.com/photo-1610993189540-b9db5a965c2e?w=800&q=80",
-              "https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?w=800&q=80"
-            ].map((img, index) => (
-              <motion.div
-                key={index}
-                className="gallery-item"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05, zIndex: 10 }}
-              >
-                <img src={img} alt={`Memory ${index + 1}`} />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <ScrollToTop />
       <FloatingWhatsApp />
+      <QuickNav />
     </div>
   );
 }
