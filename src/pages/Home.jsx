@@ -123,9 +123,10 @@ function Home() {
 
   // Group packages by destination
   const keralaPackages = packages.filter(pkg => pkg.isKerala);
+  const lakshadweepPackages = packages.filter(pkg => pkg.packageType === 'lakshadweep');
+  const darjeelingPackages = packages.filter(pkg => pkg.packageType === 'darjeeling');
   const goaPackages = packages.filter(pkg => pkg.packageType === 'goa');
   const comingSoonPackages = packages.filter(pkg => 
-    pkg.packageType === 'darjeeling' || 
     pkg.packageType === 'chikmagalur' || 
     pkg.packageType === 'rajasthan'
   );
@@ -438,7 +439,7 @@ function Home() {
       <section id="packages" className="packages-section kerala-packages-section">
         <div className="container">
           <motion.h2 
-            className="section-title"
+            className="section-title section-title-light"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -447,7 +448,7 @@ function Home() {
             🌴 Kerala Packages
           </motion.h2>
           <motion.p 
-            className="section-subtitle"
+            className="section-subtitle section-subtitle-light"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -458,6 +459,86 @@ function Home() {
 
           <div className="packages-grid">
             {keralaPackages.map((pkg, index) => (
+              <motion.div
+                key={pkg.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <PackageCard package={pkg} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="cloud-divider"></div>
+
+      {/* Lakshadweep Packages Section */}
+      <section className="packages-section lakshadweep-packages-section">
+        <div className="container">
+          <motion.h2 
+            className="section-title section-title-light"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            🏝️ Lakshadweep Packages
+          </motion.h2>
+          <motion.p 
+            className="section-subtitle section-subtitle-light"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Tropical Paradise - Crystal Clear Waters & Coral Reefs
+          </motion.p>
+
+          <div className="packages-grid">
+            {lakshadweepPackages.map((pkg, index) => (
+              <motion.div
+                key={pkg.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <PackageCard package={pkg} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="cloud-divider"></div>
+
+      {/* Darjeeling Packages Section */}
+      <section className="packages-section darjeeling-packages-section">
+        <div className="container">
+          <motion.h2 
+            className="section-title section-title-light"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            🏔️ Darjeeling Packages
+          </motion.h2>
+          <motion.p 
+            className="section-subtitle section-subtitle-light"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Queen of Hills - Tea Gardens & Himalayan Views
+          </motion.p>
+
+          <div className="packages-grid">
+            {darjeelingPackages.map((pkg, index) => (
               <motion.div
                 key={pkg.id}
                 initial={{ opacity: 0, y: 50 }}

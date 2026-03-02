@@ -1218,6 +1218,32 @@
   background: #f7fafc;
 }
 
+/* Kerala Packages Section */
+.kerala-packages-section {
+  position: relative;
+  background-image: url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 5rem 0;
+}
+
+.kerala-packages-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.kerala-packages-section .container {
+  position: relative;
+  z-index: 1;
+}
+
 /* Goa Packages Section */
 .goa-packages-section {
   position: relative;
@@ -1240,6 +1266,32 @@
 }
 
 .goa-packages-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Lakshadweep Packages Section */
+.lakshadweep-packages-section {
+  position: relative;
+  background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 5rem 0;
+}
+
+.lakshadweep-packages-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.lakshadweep-packages-section .container {
   position: relative;
   z-index: 1;
 }

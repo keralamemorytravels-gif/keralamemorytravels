@@ -282,24 +282,69 @@ export const packages = [
     packageType: "goa"
   },
 
+  // LAKSHADWEEP PACKAGES
+  {
+    id: 20,
+    name: "Lakshadweep Paradise - 4 Days",
+    category: "lakshadweep",
+    price: 45999,
+    duration: "4 Days / 3 Nights",
+    badge: "Island Paradise",
+    shortDescription: "Tropical Paradise - Crystal Clear Waters, Coral Reefs & White Sand Beaches 🏝️",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
+    includes: ["Flight/Ship Transfer", "Island Stay", "All Meals", "Snorkeling", "Water Sports", "Island Tours"],
+    locations: ["Agatti Island", "Bangaram Island", "Kavaratti"],
+    fullDescription: "Experience the untouched beauty of India's tropical paradise with pristine beaches, crystal clear waters, and vibrant marine life. Perfect for beach lovers and water sports enthusiasts.",
+    packageType: "lakshadweep"
+  },
+  {
+    id: 21,
+    name: "Lakshadweep Paradise - 5 Days",
+    category: "lakshadweep",
+    price: 54999,
+    duration: "5 Days / 4 Nights",
+    badge: "Island Paradise",
+    shortDescription: "Extended Island Escape - Snorkeling, Water Sports & Beach Relaxation 🏝️",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
+    includes: ["Flight/Ship Transfer", "Premium Island Stay", "All Meals", "Snorkeling", "Scuba Diving", "Water Sports", "Island Hopping"],
+    locations: ["Agatti Island", "Bangaram Island", "Kavaratti", "Kalpeni"],
+    fullDescription: "5 days of island hopping with water sports, coral reef exploration, scuba diving, and beach relaxation. Explore multiple islands and experience the best of Lakshadweep.",
+    packageType: "lakshadweep"
+  },
+
+  // DARJEELING PACKAGES
+  {
+    id: 22,
+    name: "Darjeeling Delight - 4 Days",
+    category: "darjeeling",
+    price: 14999,
+    duration: "4 Days / 3 Nights",
+    badge: "Hill Station",
+    shortDescription: "Queen of Hills - Tea Gardens, Toy Train & Himalayan Views 🏔️",
+    image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80",
+    includes: ["AC Travel", "Hotel Stay", "All Meals", "Toy Train Ride", "Sightseeing", "Local Guide"],
+    locations: ["Darjeeling", "Tiger Hill", "Batasia Loop", "Tea Gardens", "Toy Train", "Peace Pagoda"],
+    fullDescription: "Experience the charm of Darjeeling with breathtaking Himalayan views, colonial heritage, and world-famous tea gardens. Includes sunrise at Tiger Hill and heritage toy train ride.",
+    packageType: "darjeeling"
+  },
+  {
+    id: 23,
+    name: "Darjeeling Delight - 5 Days",
+    category: "darjeeling",
+    price: 18999,
+    duration: "5 Days / 4 Nights",
+    badge: "Hill Station",
+    shortDescription: "Extended Hill Station Experience - Monasteries, Sunrise Views & Tea Tasting 🏔️",
+    image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80",
+    includes: ["AC Travel", "Premium Stay", "All Meals", "Toy Train Ride", "Tea Tasting", "Monastery Visits", "Sightseeing"],
+    locations: ["Darjeeling", "Tiger Hill", "Batasia Loop", "Tea Gardens", "Toy Train", "Mirik Lake", "Ghoom Monastery"],
+    fullDescription: "5 days exploring Darjeeling's tea culture, Buddhist monasteries, and stunning Himalayan vistas. Extended itinerary with Mirik Lake and more time for tea plantation tours.",
+    packageType: "darjeeling"
+  },
+
   // COMING SOON DESTINATIONS
   {
     id: 17,
-    name: "Darjeeling Package",
-    category: "darjeeling",
-    price: null,
-    duration: "Coming Soon",
-    badge: "Coming Soon",
-    shortDescription: "Queen of Hills - Tea Gardens, Toy Train & Himalayan Views 🏔️",
-    image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80",
-    includes: [],
-    locations: ["Darjeeling", "Tiger Hill", "Batasia Loop", "Tea Gardens"],
-    fullDescription: "Coming Soon - Experience the charm of Darjeeling with breathtaking mountain views.",
-    packageType: "darjeeling",
-    comingSoon: true
-  },
-  {
-    id: 18,
     name: "Chikmagalur Package",
     category: "chikmagalur",
     price: null,
@@ -314,7 +359,7 @@ export const packages = [
     comingSoon: true
   },
   {
-    id: 19,
+    id: 18,
     name: "Rajasthan Package",
     category: "rajasthan",
     price: null,
