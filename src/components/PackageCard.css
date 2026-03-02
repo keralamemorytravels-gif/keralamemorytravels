@@ -91,13 +91,14 @@
   position: absolute;
   top: 1rem;
   left: 1rem;
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 0.85rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   z-index: 2;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .package-badge-label.popular {
@@ -110,8 +111,41 @@
   color: white;
 }
 
+.package-badge-label.best-value,
 .package-badge-label.best {
   background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+  color: white;
+}
+
+.package-badge-label.recommended {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: white;
+}
+
+.package-badge-label.premium {
+  background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+  color: white;
+}
+
+.package-badge-label.family-special,
+.package-badge-label.family {
+  background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+  color: white;
+}
+
+.package-badge-label.spiritual {
+  background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%);
+  color: white;
+}
+
+.package-badge-label.premium-spiritual {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #333;
+}
+
+.package-badge-label.friends-special,
+.package-badge-label.friends {
+  background: linear-gradient(135deg, #f857a6 0%, #ff5858 100%);
   color: white;
 }
 
@@ -156,4 +190,12 @@
 .view-details-btn.disabled:hover {
   transform: none;
   box-shadow: none;
+}
+
+.pricing-note {
+  font-size: 0.85rem;
+  color: #fb8500;
+  font-style: italic;
+  margin: 0.5rem 0 1rem 0;
+  line-height: 1.4;
 }

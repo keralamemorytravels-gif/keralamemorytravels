@@ -849,6 +849,216 @@
   }
 }
 
+/* Category Filter Styles */
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0 3rem 0;
+}
+
+.category-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(45, 106, 79, 0.2);
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.category-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(45, 106, 79, 0.2);
+  border-color: #2d6a4f;
+}
+
+.category-btn.active {
+  background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+  color: white;
+  border-color: #2d6a4f;
+  box-shadow: 0 6px 20px rgba(45, 106, 79, 0.4);
+}
+
+.category-icon {
+  font-size: 1.3rem;
+}
+
+.category-label {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .category-filter {
+    gap: 0.75rem;
+  }
+  
+  .category-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .category-icon {
+    font-size: 1.1rem;
+  }
+  
+  .category-label {
+    font-size: 0.9rem;
+  }
+}
+
+/* Signature Experiences Section */
+.signature-experiences-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.signature-experiences-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><circle cx="200" cy="200" r="150" fill="rgba(255,255,255,0.03)"/><circle cx="800" cy="400" r="200" fill="rgba(255,255,255,0.03)"/><circle cx="1000" cy="100" r="100" fill="rgba(255,255,255,0.03)"/></svg>');
+  opacity: 0.5;
+}
+
+.signature-experiences-section .section-title {
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.signature-experiences-section .section-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 1;
+}
+
+.signature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.signature-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.4s ease;
+}
+
+.signature-card:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border-color: #fbbf24;
+}
+
+.signature-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.signature-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.signature-card:hover .signature-image img {
+  transform: scale(1.15);
+}
+
+.signature-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature-icon {
+  font-size: 4rem;
+  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.5));
+}
+
+.signature-content {
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.signature-title {
+  font-size: 1.4rem;
+  color: #2d3748;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+
+.signature-description {
+  font-size: 1rem;
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+.premium-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+}
+
+@media (max-width: 768px) {
+  .signature-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .signature-image {
+    height: 200px;
+  }
+  
+  .signature-icon {
+    font-size: 3rem;
+  }
+  
+  .signature-title {
+    font-size: 1.2rem;
+  }
+  
+  .signature-description {
+    font-size: 0.95rem;
+  }
+}
+
 .founder-section {
   padding: 4rem 0;
   background: linear-gradient(135deg, #f7fafc 0%, #e8f4f8 100%);
@@ -972,5 +1182,348 @@
   
   .quote-text {
     font-size: 1rem;
+  }
+}
+
+
+/* Kerala Packages Section */
+.kerala-packages-section {
+  background: #f7fafc;
+}
+
+/* Goa Packages Section */
+.goa-packages-section {
+  position: relative;
+  background-image: url('https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 5rem 0;
+}
+
+.goa-packages-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.goa-packages-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Darjeeling Packages Section */
+.darjeeling-packages-section {
+  position: relative;
+  background-image: url('https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 5rem 0;
+}
+
+.darjeeling-packages-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.darjeeling-packages-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Light text for sections with background images */
+.section-title-light {
+  color: white !important;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.section-subtitle-light {
+  color: white !important;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+
+/* Coming Soon Packages Section */
+.coming-soon-packages-section {
+  position: relative;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 5rem 0;
+}
+
+.coming-soon-packages-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><circle cx="200" cy="200" r="150" fill="rgba(255,255,255,0.05)"/><circle cx="800" cy="400" r="200" fill="rgba(255,255,255,0.05)"/><circle cx="1000" cy="100" r="100" fill="rgba(255,255,255,0.05)"/></svg>');
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.coming-soon-packages-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* Signature Carousel Styles */
+.signature-carousel {
+  position: relative;
+  max-width: 1000px;
+  margin: 3rem auto 0;
+  padding: 0 1rem;
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.carousel-track {
+  position: relative;
+  height: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+}
+
+.signature-card-carousel {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.signature-image-carousel {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.signature-image-carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.signature-overlay-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature-icon-carousel {
+  font-size: 6rem;
+  filter: drop-shadow(3px 3px 10px rgba(0, 0, 0, 0.8));
+}
+
+.signature-content-carousel {
+  padding: 2.5rem;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signature-title-carousel {
+  font-size: 2rem;
+  color: #2d3748;
+  margin: 0 0 1.5rem 0;
+  font-weight: 800;
+}
+
+.signature-description-carousel {
+  font-size: 1.2rem;
+  color: #4a5568;
+  line-height: 1.8;
+  margin: 0 0 2rem 0;
+  max-width: 600px;
+}
+
+.premium-badge-carousel {
+  display: inline-block;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5);
+}
+
+/* Carousel Navigation Buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(251, 191, 36, 0.5);
+  color: #2d3748;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 25px rgba(251, 191, 36, 0.5);
+}
+
+.carousel-btn-prev {
+  left: -30px;
+}
+
+.carousel-btn-next {
+  right: -30px;
+}
+
+/* Carousel Pagination Dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.carousel-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+}
+
+.carousel-dot.active {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  border-color: #fbbf24;
+  width: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.5);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .carousel-track {
+    height: 550px;
+  }
+  
+  .signature-image-carousel {
+    height: 300px;
+  }
+  
+  .signature-icon-carousel {
+    font-size: 4rem;
+  }
+  
+  .signature-title-carousel {
+    font-size: 1.5rem;
+  }
+  
+  .signature-description-carousel {
+    font-size: 1rem;
+  }
+  
+  .signature-content-carousel {
+    padding: 1.5rem;
+  }
+  
+  .carousel-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 2rem;
+  }
+  
+  .carousel-btn-prev {
+    left: 10px;
+  }
+  
+  .carousel-btn-next {
+    right: 10px;
+  }
+  
+  .premium-badge-carousel {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-track {
+    height: 500px;
+  }
+  
+  .signature-image-carousel {
+    height: 250px;
+  }
+  
+  .signature-title-carousel {
+    font-size: 1.3rem;
+  }
+  
+  .signature-description-carousel {
+    font-size: 0.95rem;
   }
 }

@@ -5,8 +5,112 @@ import Loader from '../components/Loader';
 import ScrollToTop from '../components/ScrollToTop';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import QuickNav from '../components/QuickNav';
-import { packages } from '../data/packages';
+import { packages, signatureExperiences } from '../data/packages';
 import './Home.css';
+
+// Signature Carousel Component
+function SignatureCarousel({ experiences }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % experiences.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + experiences.length) % experiences.length);
+  };
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
+  // Auto-play carousel
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Touch handlers for mobile swipe
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) {
+      nextSlide();
+    }
+    if (touchStart - touchEnd < -75) {
+      prevSlide();
+    }
+  };
+
+  return (
+    <div className="signature-carousel">
+      <div 
+        className="carousel-container"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <button className="carousel-btn carousel-btn-prev" onClick={prevSlide}>
+          ‹
+        </button>
+        
+        <div className="carousel-track">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={exp.id}
+              className={`carousel-slide ${index === currentIndex ? 'active' : ''}`}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ 
+                opacity: index === currentIndex ? 1 : 0,
+                scale: index === currentIndex ? 1 : 0.8,
+                x: `${(index - currentIndex) * 100}%`
+              }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="signature-card-carousel">
+                <div className="signature-image-carousel">
+                  <img src={exp.image} alt={exp.name} />
+                  <div className="signature-overlay-carousel">
+                    <span className="signature-icon-carousel">{exp.icon}</span>
+                  </div>
+                </div>
+                <div className="signature-content-carousel">
+                  <h3 className="signature-title-carousel">{exp.name}</h3>
+                  <p className="signature-description-carousel">{exp.description}</p>
+                  <span className="premium-badge-carousel">Premium Experience</span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <button className="carousel-btn carousel-btn-next" onClick={nextSlide}>
+          ›
+        </button>
+      </div>
+
+      {/* Pagination Dots */}
+      <div className="carousel-dots">
+        {experiences.map((_, index) => (
+          <button
+            key={index}
+            className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
+            onClick={() => goToSlide(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -14,6 +118,17 @@ function Home() {
   useEffect(() => {
     setTimeout(() => setLoading(false), 2000);
   }, []);
+
+  if (loading) return <Loader />;
+
+  // Group packages by destination
+  const keralaPackages = packages.filter(pkg => pkg.isKerala);
+  const goaPackages = packages.filter(pkg => pkg.packageType === 'goa');
+  const comingSoonPackages = packages.filter(pkg => 
+    pkg.packageType === 'darjeeling' || 
+    pkg.packageType === 'chikmagalur' || 
+    pkg.packageType === 'rajasthan'
+  );
 
   if (loading) return <Loader />;
 
@@ -320,7 +435,7 @@ function Home() {
       </section>
 
       {/* 5. Tour Packages - Main Offerings */}
-      <section id="packages" className="packages-section">
+      <section id="packages" className="packages-section kerala-packages-section">
         <div className="container">
           <motion.h2 
             className="section-title"
@@ -329,7 +444,7 @@ function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            Tour Packages
+            🌴 Kerala Packages
           </motion.h2>
           <motion.p 
             className="section-subtitle"
@@ -338,10 +453,11 @@ function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Explore Kerala with Our Curated Packages
+            Explore God's Own Country with Our Curated Kerala Packages
           </motion.p>
+
           <div className="packages-grid">
-            {packages.map((pkg, index) => (
+            {keralaPackages.map((pkg, index) => (
               <motion.div
                 key={pkg.id}
                 initial={{ opacity: 0, y: 50 }}
@@ -358,52 +474,114 @@ function Home() {
 
       <div className="cloud-divider"></div>
 
-      {/* 6. Signature Experience - Featured Offering */}
-      <section className="signature-section">
+      {/* Goa Packages Section */}
+      <section className="packages-section goa-packages-section">
         <div className="container">
-          <motion.div 
-            className="signature-content"
+          <motion.h2 
+            className="section-title section-title-light"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="signature-text">
-              <span className="signature-label">Signature Experience</span>
-              <h2 className="signature-title">The Houseboat Experience</h2>
-              <p className="signature-description">
-                Drift along the tranquil backwaters of Alleppey aboard a traditional Kerala kettuvallam. 
-                Our premium houseboats feature air-conditioned bedrooms, open-air lounges, and freshly 
-                prepared Kerala cuisine — served as the world's most beautiful landscapes glide past your window.
-              </p>
-              <ul className="signature-features">
-                <li>✓ Private luxury houseboats for couples & families</li>
-                <li>✓ Authentic Kerala meals prepared onboard</li>
-                <li>✓ Sunrise & sunset cruises through palm-lined canals</li>
-                <li>✓ Professional crew & 24/7 support</li>
-              </ul>
-              <motion.a 
-                href="https://wa.me/919059323753?text=I'm interested in booking a houseboat experience"
-                className="signature-cta"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+            🏖️ Goa Packages
+          </motion.h2>
+          <motion.p 
+            className="section-subtitle section-subtitle-light"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Beach Paradise - Sun, Sand & Endless Fun
+          </motion.p>
+
+          <div className="packages-grid">
+            {goaPackages.map((pkg, index) => (
+              <motion.div
+                key={pkg.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                Book a Houseboat
-              </motion.a>
+                <PackageCard package={pkg} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="cloud-divider"></div>
+
+      {/* Coming Soon Destinations Section */}
+      {comingSoonPackages.length > 0 && (
+        <>
+          <section className="packages-section coming-soon-packages-section">
+            <div className="container">
+              <motion.h2 
+                className="section-title section-title-light"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                🚀 Coming Soon Destinations
+              </motion.h2>
+              <motion.p 
+                className="section-subtitle section-subtitle-light"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                Exciting New Destinations - Stay Tuned!
+              </motion.p>
+
+              <div className="packages-grid">
+                {comingSoonPackages.map((pkg, index) => (
+                  <motion.div
+                    key={pkg.id}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <PackageCard package={pkg} />
+                  </motion.div>
+                ))}
+              </div>
             </div>
-            <motion.div 
-              className="signature-image"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <img 
-                src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80" 
-                alt="Kerala Houseboat" 
-              />
-            </motion.div>
-          </motion.div>
+          </section>
+          <div className="cloud-divider"></div>
+        </>
+      )}
+
+      <div className="cloud-divider"></div>
+
+      {/* Signature Experiences */}
+      <section className="signature-experiences-section">
+        <div className="container">
+          <motion.h2 
+            className="section-title"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            ✨ Signature Experiences
+          </motion.h2>
+          <motion.p 
+            className="section-subtitle"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Premium Exclusive Experiences
+          </motion.p>
+          
+          <SignatureCarousel experiences={signatureExperiences} />
         </div>
       </section>
 

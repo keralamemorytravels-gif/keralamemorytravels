@@ -19,6 +19,7 @@ function Header() {
           <nav className="nav desktop-nav">
             <Link to="/" className="nav-link">Home</Link>
             <a href="#packages" className="nav-link">Packages</a>
+            <Link to="/package/1#gallery" className="nav-link">Gallery</Link>
             <button onClick={() => setShowBookingModal(true)} className="nav-link nav-button">How to Book</button>
             <a href="https://wa.me/919059323753" className="nav-link cta">Contact Us</a>
           </nav>
@@ -45,6 +46,7 @@ function Header() {
             >
               <Link to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link>
               <a href="#packages" className="nav-link" onClick={() => setIsMenuOpen(false)}>Packages</a>
+              <Link to="/package/1#gallery" className="nav-link" onClick={() => setIsMenuOpen(false)}>Gallery</Link>
               <button onClick={() => { setShowBookingModal(true); setIsMenuOpen(false); }} className="nav-link nav-button">How to Book</button>
               <a href="https://wa.me/919059323753" className="nav-link cta" onClick={() => setIsMenuOpen(false)}>Contact Us</a>
             </motion.nav>

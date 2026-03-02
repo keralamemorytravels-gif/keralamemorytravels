@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { packages } from '../data/packages';
+import { packages, calculateFamilyPrice, calculateHoneymoonPrice, calculateTemplePrice } from '../data/packages';
 import Loader from '../components/Loader';
 import ScrollToTop from '../components/ScrollToTop';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
@@ -14,25 +14,88 @@ function PackageDetails() {
   const [loading, setLoading] = useState(true);
   const [selectedDuration, setSelectedDuration] = useState(0);
   const [lightboxImage, setLightboxImage] = useState(null);
+  const [pricingType, setPricingType] = useState('person'); // 'person' or 'couple' for honeymoon
   
   const pkg = packages.find(p => p.id === parseInt(id));
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 500);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Scroll to gallery if hash is present
+    if (window.location.hash === '#gallery') {
+      setTimeout(() => {
+        const galleryElement = document.getElementById('gallery');
+        if (galleryElement) {
+          galleryElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 1000);
+    }
   }, []);
 
   if (loading) return <Loader />;
   if (!pkg) return <div className="not-found">Package not found</div>;
 
+  // Calculate price based on package type
+  const calculatePrice = () => {
+    if (pkg.packageType === 'family') {
+      const pricePerPerson = calculateFamilyPrice(members);
+      return pricePerPerson * members;
+    } else if (pkg.packageType === 'honeymoon') {
+      return calculateHoneymoonPrice(pricingType);
+    } else if (pkg.packageType === 'temple') {
+      const pricePerPerson = calculateTemplePrice(members);
+      return pricePerPerson * members;
+    } else if (pkg.packageOptions) {
+      const currentPackage = pkg.packageOptions[selectedDuration];
+      return currentPackage.price === "Custom" ? "Custom" : currentPackage.price * members;
+    } else {
+      return pkg.price * members;
+    }
+  };
+
+  const getPricePerPerson = () => {
+    if (pkg.packageType === 'family') {
+      return calculateFamilyPrice(members);
+    } else if (pkg.packageType === 'honeymoon') {
+      return pricingType === 'couple' ? pkg.couplePrice : pkg.price;
+    } else if (pkg.packageType === 'temple') {
+      return calculateTemplePrice(members);
+    } else if (pkg.packageOptions) {
+      return pkg.packageOptions[selectedDuration].price;
+    } else {
+      return pkg.price;
+    }
+  };
+
   const currentPackage = pkg.packageOptions ? pkg.packageOptions[selectedDuration] : { price: pkg.price };
   const isCustomPrice = currentPackage.price === "Custom";
-  const totalPrice = isCustomPrice ? "Custom" : currentPackage.price * members;
+  const totalPrice = calculatePrice();
+  const pricePerPerson = getPricePerPerson();
 
   const handleBookNow = () => {
-    const durationText = pkg.packageOptions ? `${currentPackage.days} Days / ${currentPackage.nights} Nights` : pkg.duration;
-    const priceText = isCustomPrice ? "Custom Price (You Decide)" : `₹${totalPrice}`;
-    const message = `Hello, I want to book the ${pkg.name} (${durationText}) for ${members} ${members === 1 ? 'Member' : 'Members'}. ${isCustomPrice ? 'Please share your best price.' : `Total price is ${priceText}.`}`;
+    let message = '';
+    
+    if (pkg.packageType === 'honeymoon') {
+      const pricingText = pricingType === 'couple' 
+        ? `Couple Package (₹${pkg.couplePrice})` 
+        : `Per Person (₹${pkg.price} x ${members} = ₹${totalPrice})`;
+      message = `Hello, I want to book the ${pkg.name}. Pricing: ${pricingText}. ${pkg.route}`;
+    } else if (pkg.packageType === 'family') {
+      const pricePerHead = calculateFamilyPrice(members);
+      message = `Hello, I want to book the ${pkg.name} for ${members} ${members === 1 ? 'Member' : 'Members'}. Price: ₹${pricePerHead} per person. Total: ₹${totalPrice}. ${pkg.route}`;
+    } else if (pkg.packageType === 'temple') {
+      const pricePerHead = calculateTemplePrice(members);
+      const discount = members >= 4 ? ' (Group discount applied)' : '';
+      message = `Hello, I want to book the ${pkg.name} for ${members} ${members === 1 ? 'Member' : 'Members'}. Price: ₹${pricePerHead} per head${discount}. Total: ₹${totalPrice}.`;
+    } else if (pkg.packageOptions) {
+      const durationText = `${currentPackage.days} Days / ${currentPackage.nights} Nights`;
+      const priceText = isCustomPrice ? "Custom Price (You Decide)" : `₹${totalPrice}`;
+      message = `Hello, I want to book the ${pkg.name} (${durationText}) for ${members} ${members === 1 ? 'Member' : 'Members'}. ${isCustomPrice ? 'Please share your best price.' : `Total price is ${priceText}.`}`;
+    } else {
+      message = `Hello, I want to book the ${pkg.name} for ${members} ${members === 1 ? 'Member' : 'Members'}. Total price is ₹${totalPrice}.`;
+    }
+    
     const whatsappUrl = `https://wa.me/919059323753?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -306,32 +369,35 @@ function PackageDetails() {
             </motion.section>
           )}
 
-          <motion.section 
-            className="details-section gallery-section"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <h2>Gallery</h2>
-            <div className="gallery-grid">
-              {[
-                "/keralagal1.jpg",
-                "/keralagal2.jpg",
-                "/keralagal3.jpg"
-              ].map((img, i) => (
-                <motion.img 
-                  key={i}
-                  src={img} 
-                  alt={`Gallery ${i + 1}`} 
-                  className="gallery-image"
-                  onClick={() => openLightbox(img)}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                />
-              ))}
-            </div>
-          </motion.section>
+          {pkg.isKerala && (
+            <motion.section 
+              id="gallery"
+              className="details-section gallery-section"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <h2>Gallery</h2>
+              <div className="gallery-grid">
+                {[
+                  "/keralagal1.jpg",
+                  "/keralagal2.jpg",
+                  "/keralagal3.jpg"
+                ].map((img, i) => (
+                  <motion.img 
+                    key={i}
+                    src={img} 
+                    alt={`Gallery ${i + 1}`} 
+                    className="gallery-image"
+                    onClick={() => openLightbox(img)}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                ))}
+              </div>
+            </motion.section>
+          )}
 
           {/* Lightbox Modal */}
           {lightboxImage && (
@@ -381,25 +447,63 @@ function PackageDetails() {
               </div>
             )}
 
+            {/* Honeymoon Pricing Type Selector */}
+            {pkg.packageType === 'honeymoon' && (
+              <div className="pricing-type-section">
+                <label>Select Pricing</label>
+                <div className="pricing-type-buttons">
+                  <button
+                    className={`pricing-type-btn ${pricingType === 'person' ? 'active' : ''}`}
+                    onClick={() => setPricingType('person')}
+                  >
+                    👤 Per Person<br/>
+                    <span className="pricing-type-price">₹{pkg.price}</span>
+                  </button>
+                  <button
+                    className={`pricing-type-btn ${pricingType === 'couple' ? 'active' : ''}`}
+                    onClick={() => setPricingType('couple')}
+                  >
+                    👩‍❤️‍👨 Couple<br/>
+                    <span className="pricing-type-price">₹{pkg.couplePrice}</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
             <div className="price-section">
-              <span className="price-label">Price per head</span>
-              <span className="price-value">{isCustomPrice ? "Custom" : `₹${currentPackage.price}`}</span>
+              <span className="price-label">
+                {pkg.packageType === 'honeymoon' && pricingType === 'couple' 
+                  ? 'Couple Price' 
+                  : 'Price per person'}
+              </span>
+              <span className="price-value">
+                {isCustomPrice ? "Custom" : `₹${pricePerPerson}`}
+              </span>
               {isCustomPrice && <span className="price-note">Contact us for best price</span>}
+              {pkg.packageType === 'family' && (
+                <span className="price-note">Price reduces with more members!</span>
+              )}
+              {pkg.packageType === 'temple' && members >= 4 && (
+                <span className="price-note">Group discount applied!</span>
+              )}
             </div>
 
-            <div className="members-section">
-              <label htmlFor="members">Number of Members</label>
-              <select 
-                id="members"
-                value={members} 
-                onChange={(e) => setMembers(parseInt(e.target.value))}
-                className="members-select"
-              >
-                {[...Array(10)].map((_, i) => (
-                  <option key={i + 1} value={i + 1}>{i + 1} {i === 0 ? 'Member' : 'Members'}</option>
-                ))}
-              </select>
-            </div>
+            {/* Members selector - hide for honeymoon couple pricing */}
+            {!(pkg.packageType === 'honeymoon' && pricingType === 'couple') && (
+              <div className="members-section">
+                <label htmlFor="members">Number of Members</label>
+                <select 
+                  id="members"
+                  value={members} 
+                  onChange={(e) => setMembers(parseInt(e.target.value))}
+                  className="members-select"
+                >
+                  {[...Array(10)].map((_, i) => (
+                    <option key={i + 1} value={i + 1}>{i + 1} {i === 0 ? 'Member' : 'Members'}</option>
+                  ))}
+                </select>
+              </div>
+            )}
 
             <div className="total-section">
               <span className="total-label">Total Price</span>
