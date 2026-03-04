@@ -1,0 +1,127 @@
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://keralamemorytravels.in",
+  "name": "Kerala Memory Travels",
+  "alternateName": "Kerala Memory Travels - Tour Packages",
+  "description": "Kerala Memory Travels offers affordable and customized tour packages to Kerala, Goa, Lakshadweep, and Darjeeling. Specializing in Kerala honeymoon packages, family tours, group packages, and temple tours. 7+ years of experience with 1500+ satisfied travelers.",
+  "url": "https://keralamemorytravels.in",
+  "logo": "https://keralamemorytravels.in/logo.png",
+  "image": [
+    "https://keralamemorytravels.in/logo.png",
+    "https://keralamemorytravels.in/keralagal1.jpg",
+    "https://keralamemorytravels.in/keralagal2.jpg",
+    "https://keralamemorytravels.in/keralagal3.jpg"
+  ],
+  "telephone": "+919059323753",
+  "email": "info@keralamemorytravels.in",
+  "priceRange": "₹₹",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN",
+    "addressRegion": "Kerala",
+    "addressLocality": "Kerala"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "10.8505",
+    "longitude": "76.2711"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "09:00",
+      "closes": "21:00"
+    }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/kerala_memory_travels",
+    "https://github.com/keralamemorytravels-gif/keralamemorytravels"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "1500",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Travel Packages",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "TouristTrip",
+          "name": "Kerala Group Package - 3 Days",
+          "description": "Perfect group getaway covering Kerala's best highlights",
+          "touristType": "Group Tours",
+          "itinerary": {
+            "@type": "ItemList",
+            "itemListElement": [
+              "Kochi",
+              "Athirappilly",
+              "Munnar",
+              "Alappuzha"
+            ]
+          }
+        },
+        "price": "3999",
+        "priceCurrency": "INR"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "TouristTrip",
+          "name": "Kerala Honeymoon Package",
+          "description": "Romantic Kerala experience for couples",
+          "touristType": "Honeymoon"
+        },
+        "price": "12999",
+        "priceCurrency": "INR"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "TouristTrip",
+          "name": "Goa Beach Package",
+          "description": "Complete Goa experience with beaches and nightlife",
+          "touristType": "Beach Holiday"
+        },
+        "price": "7999",
+        "priceCurrency": "INR"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "TouristTrip",
+          "name": "Lakshadweep Island Tour",
+          "description": "Tropical paradise with crystal clear waters",
+          "touristType": "Island Tour"
+        },
+        "price": "45999",
+        "priceCurrency": "INR"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "TouristTrip",
+          "name": "Darjeeling Hill Station Package",
+          "description": "Queen of Hills with tea gardens and Himalayan views",
+          "touristType": "Hill Station"
+        },
+        "price": "14999",
+        "priceCurrency": "INR"
+      }
+    ]
+  }
+}
