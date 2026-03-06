@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { packages, calculateFamilyPrice, calculateHoneymoonPrice, calculateTemplePrice } from '../data/packages';
+import { packages, calculateFamilyPrice, calculateGoaFamilyPrice, calculateHoneymoonPrice, calculateGoaHoneymoonPrice, calculateTemplePrice } from '../data/packages';
 import Loader from '../components/Loader';
 import ScrollToTop from '../components/ScrollToTop';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
@@ -42,8 +42,13 @@ function PackageDetails() {
     if (pkg.packageType === 'family') {
       const pricePerPerson = calculateFamilyPrice(members);
       return pricePerPerson * members;
+    } else if (pkg.packageType === 'goa-family') {
+      const pricePerPerson = calculateGoaFamilyPrice(members);
+      return pricePerPerson * members;
     } else if (pkg.packageType === 'honeymoon') {
       return calculateHoneymoonPrice(pricingType);
+    } else if (pkg.packageType === 'goa-honeymoon') {
+      return calculateGoaHoneymoonPrice(pricingType);
     } else if (pkg.packageType === 'temple') {
       const pricePerPerson = calculateTemplePrice(members);
       return pricePerPerson * members;
@@ -58,7 +63,11 @@ function PackageDetails() {
   const getPricePerPerson = () => {
     if (pkg.packageType === 'family') {
       return calculateFamilyPrice(members);
+    } else if (pkg.packageType === 'goa-family') {
+      return calculateGoaFamilyPrice(members);
     } else if (pkg.packageType === 'honeymoon') {
+      return pricingType === 'couple' ? pkg.couplePrice : pkg.price;
+    } else if (pkg.packageType === 'goa-honeymoon') {
       return pricingType === 'couple' ? pkg.couplePrice : pkg.price;
     } else if (pkg.packageType === 'temple') {
       return calculateTemplePrice(members);
@@ -77,14 +86,14 @@ function PackageDetails() {
   const handleBookNow = () => {
     let message = '';
     
-    if (pkg.packageType === 'honeymoon') {
+    if (pkg.packageType === 'honeymoon' || pkg.packageType === 'goa-honeymoon') {
       const pricingText = pricingType === 'couple' 
         ? `Couple Package (₹${pkg.couplePrice})` 
         : `Per Person (₹${pkg.price} x ${members} = ₹${totalPrice})`;
-      message = `Hello, I want to book the ${pkg.name}. Pricing: ${pricingText}. ${pkg.route}`;
-    } else if (pkg.packageType === 'family') {
-      const pricePerHead = calculateFamilyPrice(members);
-      message = `Hello, I want to book the ${pkg.name} for ${members} ${members === 1 ? 'Member' : 'Members'}. Price: ₹${pricePerHead} per person. Total: ₹${totalPrice}. ${pkg.route}`;
+      message = `Hello, I want to book the ${pkg.name}. Pricing: ${pricingText}. ${pkg.route || ''}`;
+    } else if (pkg.packageType === 'family' || pkg.packageType === 'goa-family') {
+      const pricePerHead = pkg.packageType === 'family' ? calculateFamilyPrice(members) : calculateGoaFamilyPrice(members);
+      message = `Hello, I want to book the ${pkg.name} for ${members} ${members === 1 ? 'Member' : 'Members'}. Price: ₹${pricePerHead} per person. Total: ₹${totalPrice}. ${pkg.route || ''}`;
     } else if (pkg.packageType === 'temple') {
       const pricePerHead = calculateTemplePrice(members);
       const discount = members >= 4 ? ' (Group discount applied)' : '';
@@ -161,6 +170,33 @@ function PackageDetails() {
         <>
           <video autoPlay loop muted playsInline className="package-page-video-bg">
             <source src="/elephantbg.mp4" type="video/mp4" />
+          </video>
+          <div className="package-page-video-overlay"></div>
+        </>
+      )}
+      
+      {pkg.isGoa && (
+        <>
+          <video autoPlay loop muted playsInline className="package-page-video-bg">
+            <source src="/goabg.mp4" type="video/mp4" />
+          </video>
+          <div className="package-page-video-overlay"></div>
+        </>
+      )}
+      
+      {(pkg.packageType === 'lakshadweep') && (
+        <>
+          <video autoPlay loop muted playsInline className="package-page-video-bg">
+            <source src="/laxdeepbg.mp4" type="video/mp4" />
+          </video>
+          <div className="package-page-video-overlay"></div>
+        </>
+      )}
+      
+      {(pkg.packageType === 'darjeeling') && (
+        <>
+          <video autoPlay loop muted playsInline className="package-page-video-bg">
+            <source src="/Darjeelingbg.mp4" type="video/mp4" />
           </video>
           <div className="package-page-video-overlay"></div>
         </>
@@ -246,7 +282,103 @@ function PackageDetails() {
         </>
       )}
 
-      {!pkg.isKerala && (
+      {/* Goa Welcome Section */}
+      {pkg.isGoa && (
+        <>
+          <motion.section 
+            className="kerala-intro-section"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="container">
+              <motion.h1 
+                className="kerala-intro-title"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              >
+                Welcome to Goa – India's Beach Paradise
+              </motion.h1>
+              <motion.p 
+                className="kerala-intro-text"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                Goa is a land of sun-kissed beaches, vibrant nightlife, Portuguese heritage, water sports, and endless fun. 
+                Experience the perfect blend of relaxation and adventure in India's favorite beach destination.
+              </motion.p>
+            </div>
+          </motion.section>
+        </>
+      )}
+
+      {/* Lakshadweep Welcome Section */}
+      {pkg.packageType === 'lakshadweep' && (
+        <>
+          <motion.section 
+            className="kerala-intro-section"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="container">
+              <motion.h1 
+                className="kerala-intro-title"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              >
+                Welcome to Lakshadweep – India's Tropical Paradise
+              </motion.h1>
+              <motion.p 
+                className="kerala-intro-text"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                Lakshadweep is a pristine archipelago of coral islands with crystal clear waters, white sand beaches, vibrant marine life, and untouched natural beauty. 
+                Experience the ultimate island paradise with world-class snorkeling and diving.
+              </motion.p>
+            </div>
+          </motion.section>
+        </>
+      )}
+
+      {/* Darjeeling Welcome Section */}
+      {pkg.packageType === 'darjeeling' && (
+        <>
+          <motion.section 
+            className="kerala-intro-section"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="container">
+              <motion.h1 
+                className="kerala-intro-title"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              >
+                Welcome to Darjeeling – The Queen of Hills
+              </motion.h1>
+              <motion.p 
+                className="kerala-intro-text"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                Darjeeling is a mesmerizing hill station with breathtaking Himalayan views, world-famous tea gardens, colonial charm, and the iconic toy train. 
+                Experience the perfect blend of natural beauty, culture, and serenity in the lap of the Himalayas.
+              </motion.p>
+            </div>
+          </motion.section>
+        </>
+      )}
+
+      {!pkg.isKerala && !pkg.isGoa && pkg.packageType !== 'lakshadweep' && pkg.packageType !== 'darjeeling' && (
         <motion.div 
           className="details-hero"
           initial={{ opacity: 0 }}
@@ -507,7 +639,7 @@ function PackageDetails() {
             )}
 
             {/* Honeymoon Pricing Type Selector */}
-            {pkg.packageType === 'honeymoon' && (
+            {(pkg.packageType === 'honeymoon' || pkg.packageType === 'goa-honeymoon') && (
               <div className="pricing-type-section">
                 <label>Select Pricing</label>
                 <div className="pricing-type-buttons">
@@ -531,7 +663,7 @@ function PackageDetails() {
 
             <div className="price-section">
               <span className="price-label">
-                {pkg.packageType === 'honeymoon' && pricingType === 'couple' 
+                {(pkg.packageType === 'honeymoon' || pkg.packageType === 'goa-honeymoon') && pricingType === 'couple' 
                   ? 'Couple Price' 
                   : 'Price per person'}
               </span>
@@ -539,7 +671,7 @@ function PackageDetails() {
                 {isCustomPrice ? "Custom" : `₹${pricePerPerson}`}
               </span>
               {isCustomPrice && <span className="price-note">Contact us for best price</span>}
-              {pkg.packageType === 'family' && (
+              {(pkg.packageType === 'family' || pkg.packageType === 'goa-family') && (
                 <span className="price-note">Price reduces with more members!</span>
               )}
               {pkg.packageType === 'temple' && members >= 4 && (
@@ -548,7 +680,7 @@ function PackageDetails() {
             </div>
 
             {/* Members selector - hide for honeymoon couple pricing */}
-            {!(pkg.packageType === 'honeymoon' && pricingType === 'couple') && (
+            {!((pkg.packageType === 'honeymoon' || pkg.packageType === 'goa-honeymoon') && pricingType === 'couple') && (
               <div className="members-section">
                 <label htmlFor="members">Number of Members</label>
                 <select 

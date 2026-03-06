@@ -2,6 +2,9 @@
   padding-bottom: 100px;
   position: relative;
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 /* Full Page Video Background for Kerala Package */
@@ -336,12 +339,16 @@
   padding: 3rem 1rem;
   position: relative;
   z-index: 1;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .details-main {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .details-section h2 {
@@ -355,12 +362,17 @@
   padding: 1rem 1.5rem;
   border-radius: 12px;
   border-left: 5px solid #fb8500;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .details-main {
   background: transparent;
   border-radius: 20px;
   padding: 2rem;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .details-description {
@@ -374,6 +386,9 @@
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Itinerary Section */
@@ -504,6 +519,7 @@
   margin: 0;
   display: grid;
   gap: 1rem;
+  max-width: 100%;
 }
 
 .locations-list li,
@@ -521,6 +537,9 @@
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .locations-list li:hover,
@@ -1073,14 +1092,19 @@
 @media (max-width: 1024px) {
   .details-content {
     grid-template-columns: 1fr;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   
   .details-sidebar {
     position: static;
+    max-width: 100%;
   }
   
   .details-title {
     font-size: 2rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .gallery-grid {
@@ -1096,60 +1120,172 @@
     min-height: calc(100% + 200px);
   }
   
+  /* Prevent zoom and horizontal scroll on mobile */
+  .package-details {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+  /* Container constraints */
+  .container {
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    overflow-x: hidden;
+  }
+  
+  /* Details content - single column on mobile */
+  .details-content {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 0.75rem;
+    gap: 2rem;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .details-main {
+    padding: 0.5rem;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .details-section {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .details-section h2 {
+    font-size: 1.4rem;
+    padding: 0.75rem 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .details-description {
+    font-size: 0.95rem;
+    padding: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .locations-list li,
+  .includes-list li {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    flex-wrap: wrap;
+  }
+  
   /* Kerala intro section */
+  .kerala-intro-section {
+    padding: 4rem 0 3rem 0;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
   .kerala-intro-title {
-    font-size: 2rem;
-    padding: 0 1rem;
+    font-size: 1.5rem;
+    padding: 1rem;
+    line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .kerala-intro-text {
-    font-size: 1.1rem;
-    padding: 0 1rem;
+    font-size: 0.95rem;
+    padding: 1.5rem 1rem;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   /* Section titles */
   .section-title-kerala {
-    font-size: 2rem;
-    padding: 0 1rem;
-  }
-  
-  /* Details content */
-  .details-content {
-    padding: 2rem 1rem;
-  }
-  
-  .details-main {
-    padding: 1.5rem;
+    font-size: 1.5rem;
+    padding: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   /* Booking card */
   .booking-card {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    max-width: 100%;
   }
   
   .duration-select,
   .members-select {
     font-size: 0.95rem;
+    padding: 0.65rem;
+    max-width: 100%;
   }
   
   .price-value {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
   
   .total-value {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
+  }
+  
+  .book-now-btn {
+    font-size: 0.95rem;
+    padding: 0.85rem;
+    max-width: 100%;
+  }
+  
+  /* Cultural cards */
+  .cultural-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 100%;
+  }
+  
+  .cultural-card {
+    min-height: 250px;
+    max-width: 100%;
+  }
+  
+  .cultural-title {
+    font-size: 1rem;
+    padding: 1.5rem 0.75rem 0 0.75rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .cultural-description {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   /* Itinerary */
+  .itinerary-section {
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 1.5rem;
+  }
+  
   .itinerary-day {
     grid-template-columns: 60px 1fr;
     gap: 1rem;
+    max-width: 100%;
   }
   
   .day-number {
     width: 60px;
     height: 60px;
     font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  
+  .day-content {
+    max-width: 100%;
+    overflow-x: hidden;
   }
   
   .itinerary-day:not(:last-child)::after {
@@ -1158,24 +1294,48 @@
   }
   
   .day-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .day-subtitle {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .day-places {
     flex-direction: column;
+    gap: 0.5rem;
+    max-width: 100%;
   }
   
   .place-tag {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
   }
   
   .day-description {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Gallery section */
+  .gallery-section {
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 2rem 1rem;
+  }
+  
+  /* Sidebar becomes full width on mobile */
+  .details-sidebar {
+    position: static;
+    max-width: 100%;
   }
 }
 

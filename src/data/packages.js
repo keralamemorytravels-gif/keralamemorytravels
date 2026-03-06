@@ -7,9 +7,22 @@ export const calculateFamilyPrice = (members) => {
   return 9999;
 };
 
+export const calculateGoaFamilyPrice = (members) => {
+  if (members >= 5) return 6999;
+  if (members === 4) return 7499;
+  if (members === 3) return 7999;
+  if (members === 2) return 8499;
+  return 8999;
+};
+
 export const calculateHoneymoonPrice = (type) => {
   if (type === "couple") return 25999;
   return 12999;
+};
+
+export const calculateGoaHoneymoonPrice = (type) => {
+  if (type === "couple") return 22999;
+  return 11999;
 };
 
 export const calculateTemplePrice = (members) => {
@@ -238,77 +251,166 @@ export const packages = [
     pricingNote: "₹21,999 per head. ₹17,999 for 4+ members"
   },
 
-  // GOA PACKAGES
+  // GOA PACKAGES - GROUP
   {
     id: 14,
-    name: "Goa Friends Special - 3 Days",
+    name: "Goa Group Package - 3 Days",
     category: "goa",
     price: 7999,
     duration: "3 Days / 2 Nights",
-    badge: "Friends Special",
-    shortDescription: "Complete Goa experience - North & South Goa beaches, forts, and nightlife 🎉",
+    badge: "Popular",
+    shortDescription: "Perfect group getaway - North & South Goa beaches, forts, and nightlife 🎉",
     image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80",
-    includes: ["Travel Van", "Basic Stay", "Sightseeing", "Beach Activities"],
+    includes: ["AC Travel", "Hotel Stay", "Breakfast", "Sightseeing", "Beach Activities"],
     locations: ["Baga Beach", "Calangute", "Anjuna", "Fort Aguada", "Colva", "Benaulim", "Dona Paula", "Basilica of Bom Jesus"],
-    fullDescription: "Perfect friends package covering all Goa highlights - beaches, forts, and churches.",
-    packageType: "goa"
+    fullDescription: "Perfect friends package covering all Goa highlights - beaches, forts, and churches. Experience the vibrant nightlife and water sports.",
+    packageType: "goa",
+    isGoa: true
   },
   {
     id: 15,
-    name: "Goa Friends Special - 4 Days",
+    name: "Goa Group Package - 4 Days",
     category: "goa",
     price: 9999,
     duration: "4 Days / 3 Nights",
-    badge: "Friends Special",
-    shortDescription: "Extended Goa adventure with more time to explore and party 🎉",
+    badge: "Best Value",
+    shortDescription: "Extended Goa adventure with more time to explore beaches and party 🎉",
     image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
-    includes: ["Travel Van", "Stay", "Sightseeing", "Beach Activities", "Water Sports"],
-    locations: ["North Goa", "South Goa", "Dudhsagar Falls", "Spice Plantation"],
-    fullDescription: "4 days of Goa fun with beaches, waterfalls, and adventure activities.",
-    packageType: "goa"
+    includes: ["AC Travel", "Hotel Stay", "All Meals", "Sightseeing", "Beach Activities", "Water Sports"],
+    locations: ["North Goa Beaches", "South Goa Beaches", "Dudhsagar Falls", "Spice Plantation", "Old Goa Churches"],
+    fullDescription: "4 days of Goa fun with beaches, waterfalls, spice plantations, and adventure activities. Perfect for groups and friends.",
+    packageType: "goa",
+    isGoa: true
   },
   {
     id: 16,
-    name: "Goa Friends Special - 5 Days",
+    name: "Goa Group Package - 5 Days",
     category: "goa",
     price: 12999,
     duration: "5 Days / 4 Nights",
-    badge: "Friends Special",
+    badge: "Premium",
     shortDescription: "Ultimate Goa experience with premium stays and exclusive activities 🎉",
     image: "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=800&q=80",
-    includes: ["Travel Van", "Premium Stay", "All Sightseeing", "Water Sports", "Beach Parties"],
-    locations: ["All Goa Beaches", "Dudhsagar Falls", "Spice Plantation", "Old Goa", "Palolem"],
-    fullDescription: "5 days of ultimate Goa experience with everything included.",
-    packageType: "goa"
+    includes: ["AC Travel", "Premium Stay", "All Meals", "All Sightseeing", "Water Sports", "Beach Parties", "Cruise"],
+    locations: ["All Goa Beaches", "Dudhsagar Falls", "Spice Plantation", "Old Goa", "Palolem", "Butterfly Beach"],
+    fullDescription: "5 days of ultimate Goa experience with everything included. Premium accommodations and exclusive beach experiences.",
+    packageType: "goa",
+    isGoa: true
+  },
+
+  // GOA HONEYMOON PACKAGES
+  {
+    id: 25,
+    name: "Goa Honeymoon Package 1",
+    category: "goa-honeymoon",
+    price: 11999,
+    couplePrice: 22999,
+    duration: "Flexible Duration",
+    badge: "Romantic",
+    shortDescription: "Romantic beach escape - Candlelight dinners, sunset cruises & private beaches 🌅",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
+    includes: ["Beach Resort Stay", "Candlelight Dinner", "Sunset Cruise", "All Meals", "Romantic Decor", "Private Transfers"],
+    locations: ["Palolem Beach", "Agonda Beach", "Butterfly Beach", "Cabo de Rama Fort"],
+    fullDescription: "Create unforgettable memories with your loved one on Goa's pristine beaches. Romantic sunset cruises and private beach experiences.",
+    packageType: "goa-honeymoon",
+    isGoa: true,
+    route: "Airport → South Goa Beaches → Sunset Points → Airport"
+  },
+  {
+    id: 26,
+    name: "Goa Honeymoon Package 2",
+    category: "goa-honeymoon",
+    price: 11999,
+    couplePrice: 22999,
+    duration: "Flexible Duration",
+    badge: "Romantic",
+    shortDescription: "Beach + Adventure combo - Water sports, island trips & romantic dinners 🏖️",
+    image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80",
+    includes: ["Beach Resort", "Candlelight Dinner", "Water Sports", "Island Trip", "All Meals", "Romantic Decor"],
+    locations: ["Baga Beach", "Calangute", "Grand Island", "Anjuna", "Vagator"],
+    fullDescription: "Perfect blend of romance and adventure for couples. Water sports, island hopping, and romantic beach dinners.",
+    packageType: "goa-honeymoon",
+    isGoa: true,
+    route: "Airport → North Goa → Grand Island → Beaches → Airport"
+  },
+
+  // GOA FAMILY PACKAGES
+  {
+    id: 27,
+    name: "Goa Family Package 1 (4-5 Days)",
+    category: "goa-family",
+    basePrice: 8999,
+    duration: "4-5 Days",
+    badge: "Family Special",
+    shortDescription: "Beach + Fun Package - Perfect family vacation with beaches, water parks & sightseeing 🏖️",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
+    includes: ["Family Rooms", "All Meals", "Beach Activities", "Water Park", "Sightseeing", "Local Guide"],
+    locations: ["Baga Beach", "Calangute", "Splashdown Water Park", "Old Goa", "Spice Plantation"],
+    fullDescription: "Complete family package with beaches, water parks, and kid-friendly activities. Price reduces with more members!",
+    packageType: "goa-family",
+    isGoa: true,
+    route: "Airport → North Goa → Water Park → Old Goa → Beaches → Airport",
+    pricingNote: "Starts from ₹8,999 per person. Reduces to ₹6,999 for 5+ members"
+  },
+  {
+    id: 28,
+    name: "Goa Family Package 2 (4-5 Days)",
+    category: "goa-family",
+    basePrice: 8999,
+    duration: "4-5 Days",
+    badge: "Family Special",
+    shortDescription: "Beach + Wildlife Package - Beaches, wildlife sanctuary & adventure activities 🐾",
+    image: "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=800&q=80",
+    includes: ["Family Rooms", "All Meals", "Beach Activities", "Wildlife Safari", "Dudhsagar Falls", "Local Guide"],
+    locations: ["South Goa Beaches", "Bhagwan Mahavir Wildlife Sanctuary", "Dudhsagar Falls", "Spice Plantation"],
+    fullDescription: "Nature and beach focused family package. Wildlife safari, waterfalls, and relaxing beaches!",
+    packageType: "goa-family",
+    isGoa: true,
+    route: "Airport → South Goa → Wildlife Sanctuary → Dudhsagar → Beaches → Airport",
+    pricingNote: "Starts from ₹8,999 per person. Reduces to ₹6,999 for 5+ members"
   },
 
   // LAKSHADWEEP PACKAGES
   {
     id: 20,
-    name: "Lakshadweep Paradise - 4 Days",
+    name: "Lakshadweep Paradise - 3 Days",
     category: "lakshadweep",
-    price: 45999,
-    duration: "4 Days / 3 Nights",
+    price: 14999,
+    duration: "3 Days / 2 Nights",
     badge: "Island Paradise",
     shortDescription: "Tropical Paradise - Crystal Clear Waters, Coral Reefs & White Sand Beaches 🏝️",
     image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
-    includes: ["Flight/Ship Transfer", "Island Stay", "All Meals", "Snorkeling", "Water Sports", "Island Tours"],
-    locations: ["Agatti Island", "Bangaram Island", "Kavaratti"],
-    fullDescription: "Experience the untouched beauty of India's tropical paradise with pristine beaches, crystal clear waters, and vibrant marine life. Perfect for beach lovers and water sports enthusiasts.",
+    includes: ["Flight/Ship Transfer", "Island Stay", "All Meals", "Snorkeling", "Island Tours"],
+    locations: ["Agatti Island", "Kavaratti"],
+    fullDescription: "Experience the untouched beauty of India's tropical paradise with pristine beaches, crystal clear waters, and vibrant marine life. Perfect 3-day getaway for beach lovers.",
     packageType: "lakshadweep"
   },
   {
     id: 21,
-    name: "Lakshadweep Paradise - 5 Days",
+    name: "Lakshadweep Paradise - 4 Days",
     category: "lakshadweep",
-    price: 54999,
-    duration: "5 Days / 4 Nights",
+    price: 18999,
+    duration: "4 Days / 3 Nights",
     badge: "Island Paradise",
     shortDescription: "Extended Island Escape - Snorkeling, Water Sports & Beach Relaxation 🏝️",
     image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
-    includes: ["Flight/Ship Transfer", "Premium Island Stay", "All Meals", "Snorkeling", "Scuba Diving", "Water Sports", "Island Hopping"],
+    includes: ["Flight/Ship Transfer", "Island Stay", "All Meals", "Snorkeling", "Water Sports", "Island Hopping"],
+    locations: ["Agatti Island", "Bangaram Island", "Kavaratti"],
+    fullDescription: "4 days of island paradise with water sports, coral reef exploration, and beach relaxation. Explore multiple islands and experience the best of Lakshadweep.",
+    packageType: "lakshadweep"
+  },
+  {
+    id: 24,
+    name: "Lakshadweep Paradise - 5 Days",
+    category: "lakshadweep",
+    price: 21999,
+    duration: "5 Days / 4 Nights",
+    badge: "Island Paradise",
+    shortDescription: "Ultimate Island Experience - Scuba Diving, Island Hopping & Premium Stay 🏝️",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
+    includes: ["Flight/Ship Transfer", "Premium Island Stay", "All Meals", "Snorkeling", "Scuba Diving", "Water Sports", "Island Hopping", "Kayaking"],
     locations: ["Agatti Island", "Bangaram Island", "Kavaratti", "Kalpeni"],
-    fullDescription: "5 days of island hopping with water sports, coral reef exploration, scuba diving, and beach relaxation. Explore multiple islands and experience the best of Lakshadweep.",
+    fullDescription: "5 days of ultimate island hopping with scuba diving, coral reef exploration, water sports, and premium beach relaxation. Complete Lakshadweep experience with all activities included.",
     packageType: "lakshadweep"
   },
 
