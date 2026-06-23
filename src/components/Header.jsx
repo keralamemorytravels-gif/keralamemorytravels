@@ -20,8 +20,10 @@ function Header() {
             <Link to="/" className="nav-link">Home</Link>
             <a href="#packages" className="nav-link">Packages</a>
             <Link to="/package/1#gallery" className="nav-link">Gallery</Link>
+            <Link to="/blog" className="nav-link">Blog</Link>
+            <Link to="/about" className="nav-link">About Us</Link>
             <button onClick={() => setShowBookingModal(true)} className="nav-link nav-button">How to Book</button>
-            <a href="https://wa.me/919059323753" className="nav-link cta">Contact Us</a>
+            <Link to="/contact" className="nav-link cta">Contact Us</Link>
           </nav>
 
           <button 
@@ -47,8 +49,10 @@ function Header() {
               <Link to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link>
               <a href="#packages" className="nav-link" onClick={() => setIsMenuOpen(false)}>Packages</a>
               <Link to="/package/1#gallery" className="nav-link" onClick={() => setIsMenuOpen(false)}>Gallery</Link>
+              <Link to="/blog" className="nav-link" onClick={() => setIsMenuOpen(false)}>Blog</Link>
+              <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About Us</Link>
               <button onClick={() => { setShowBookingModal(true); setIsMenuOpen(false); }} className="nav-link nav-button">How to Book</button>
-              <a href="https://wa.me/919059323753" className="nav-link cta" onClick={() => setIsMenuOpen(false)}>Contact Us</a>
+              <Link to="/contact" className="nav-link cta" onClick={() => setIsMenuOpen(false)}>Contact Us</Link>
             </motion.nav>
           )}
         </AnimatePresence>
