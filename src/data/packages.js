@@ -84,7 +84,7 @@ export const packages = [
     id: 4,
     name: "Kerala Group Package - 6 Days",
     category: "group",
-    price: 9999,
+    price: 12999,
     oldPrice: 8999,
     duration: "6 Days / 5 Nights",
     badge: "Premium",
