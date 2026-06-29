@@ -46,7 +46,8 @@ function PackageDetails() {
       const pricePerPerson = calculateGoaFamilyPrice(members);
       return pricePerPerson * members;
     } else if (pkg.packageType === 'honeymoon') {
-      return calculateHoneymoonPrice(pricingType);
+      if (pricingType === 'couple') return pkg.oldCouplePrice || pkg.couplePrice;
+      return (pkg.oldPrice || pkg.price) * members;
     } else if (pkg.packageType === 'goa-honeymoon') {
       return calculateGoaHoneymoonPrice(pricingType);
     } else if (pkg.packageType === 'temple') {
@@ -56,7 +57,7 @@ function PackageDetails() {
       const currentPackage = pkg.packageOptions[selectedDuration];
       return currentPackage.price === "Custom" ? "Custom" : currentPackage.price * members;
     } else {
-      return pkg.price * members;
+      return (pkg.oldPrice || pkg.price) * members;
     }
   };
 
@@ -66,7 +67,9 @@ function PackageDetails() {
     } else if (pkg.packageType === 'goa-family') {
       return calculateGoaFamilyPrice(members);
     } else if (pkg.packageType === 'honeymoon') {
-      return pricingType === 'couple' ? pkg.couplePrice : pkg.price;
+      // Use oldPrice (current price) if available
+      if (pricingType === 'couple') return pkg.oldCouplePrice || pkg.couplePrice;
+      return pkg.oldPrice || pkg.price;
     } else if (pkg.packageType === 'goa-honeymoon') {
       return pricingType === 'couple' ? pkg.couplePrice : pkg.price;
     } else if (pkg.packageType === 'temple') {
@@ -74,7 +77,8 @@ function PackageDetails() {
     } else if (pkg.packageOptions) {
       return pkg.packageOptions[selectedDuration].price;
     } else {
-      return pkg.price;
+      // Use oldPrice (current price) if available
+      return pkg.oldPrice || pkg.price;
     }
   };
 
@@ -664,12 +668,26 @@ function PackageDetails() {
             <div className="price-section">
               <span className="price-label">
                 {(pkg.packageType === 'honeymoon' || pkg.packageType === 'goa-honeymoon') && pricingType === 'couple' 
-                  ? 'Couple Price' 
-                  : 'Price per person'}
+                  ? 'Current Couple Price' 
+                  : 'Current Price per person'}
               </span>
               <span className="price-value">
                 {isCustomPrice ? "Custom" : `₹${pricePerPerson}`}
               </span>
+              {/* Show future higher price with strikethrough */}
+              {pkg.oldPrice && !(pkg.packageType === 'honeymoon' && pricingType === 'couple') && (
+                <span className="future-price-note">
+                  📈 From Aug 1, 2026: <s>₹{pkg.price}</s>
+                </span>
+              )}
+              {pkg.oldCouplePrice && pkg.packageType === 'honeymoon' && pricingType === 'couple' && (
+                <span className="future-price-note">
+                  📈 From Aug 1, 2026: <s>₹{pkg.couplePrice}</s>
+                </span>
+              )}
+              {(pkg.oldPrice || pkg.oldCouplePrice) && (
+                <span className="price-increase-alert">⚠️ Book now to lock in today's price!</span>
+              )}
               {isCustomPrice && <span className="price-note">Contact us for best price</span>}
               {(pkg.packageType === 'family' || pkg.packageType === 'goa-family') && (
                 <span className="price-note">Price reduces with more members!</span>

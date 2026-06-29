@@ -1347,6 +1347,38 @@
   font-style: italic;
 }
 
+.old-price-detail {
+  display: block;
+  color: #e53e3e;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.future-price-note {
+  display: block;
+  color: #555;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+.future-price-note s {
+  color: #e53e3e;
+  font-weight: 600;
+}
+
+.price-increase-alert {
+  display: block;
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border: 1px solid #fb8500;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  color: #c05621;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
 .package-option {
   margin-bottom: 3rem;
 }
